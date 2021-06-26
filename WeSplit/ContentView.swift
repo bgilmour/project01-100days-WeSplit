@@ -34,7 +34,7 @@ struct ContentView: View {
     var body: some View {
         NavigationView {
             Form {
-                Section {
+                Section(header: Text("Check amount")) {
                     TextField("Amount", text: $checkAmount)
                         .keyboardType(.decimalPad)
                 }
@@ -58,12 +58,14 @@ struct ContentView: View {
                         .keyboardType(.numberPad)
                 }
 
-                Section(header: Text("Amount per person")) {
-                    Text("$\(totalPerPerson, specifier: "%.2f")")
-                }
-
                 Section(header: Text("Total amount")) {
                     Text("$\(totalAmount, specifier: "%.2f")")
+                        .foregroundColor(tipPercentages[tipPercentage] == 0 ? .red : .primary)
+                        .fontWeight(tipPercentages[tipPercentage] == 0 ? .bold : .regular)
+                }
+
+                Section(header: Text("Amount per person")) {
+                    Text("$\(totalPerPerson, specifier: "%.2f")")
                 }
             }
             .navigationBarTitle("WeSplit")
